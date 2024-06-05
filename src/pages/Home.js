@@ -7,7 +7,7 @@ const propTypes = {};
 
 const defaultProps = {};
 
-const Home = () => {
+function Home () {
     return <div>
         <NavBar>
             <ProductList></ProductList>
