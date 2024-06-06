@@ -9,6 +9,7 @@ import {
     Transition,
 } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
 
 const user = {
     name: 'Tom Cook',
@@ -80,14 +81,15 @@ export default function NavBar ({ children }) {
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-4 flex items-center md:ml-6">
-                                            <button
-                                                type="button"
-                                                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                            >
-                                                <span className="absolute -inset-1.5" />
-                                                <span className="sr-only">View notifications</span>
-                                                <ShoppingCartIcon className="h-7 w-7 -mr-1" aria-hidden="true" />
-                                            </button>
+                                            <Link to={"/cart"}>
+                                                <button
+                                                    type="button"
+                                                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                                >
+                                                    <span className="absolute -inset-1.5" />
+                                                    <ShoppingCartIcon className="h-7 w-7 -mr-1" aria-hidden="true" />
+                                                </button>
+                                            </Link>
                                             <span className="inline-flex items-center mb-5 rounded-md bg-green-50 px-[6px] py-[2px] text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
                                                 3
                                             </span>
@@ -176,7 +178,6 @@ export default function NavBar ({ children }) {
                                             className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                         >
                                             <span className="absolute -inset-1.5" />
-                                            <span className="sr-only">View notifications</span>
                                             <ShoppingCartIcon className="h-7 w-7 -mr-1" aria-hidden="true" />
                                         </button>
                                         <span className="inline-flex items-center mb-5 rounded-md bg-green-50 px-[6px] py-[2px] text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">

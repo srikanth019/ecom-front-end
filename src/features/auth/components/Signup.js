@@ -77,7 +77,7 @@ export default function Signup () {
 
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Already have an account?{' '}
-                        <Link to={"/login"} className="font-semibold leading-6 text-indigo-500 hover:text-black">
+                        <Link to="/login" className="font-semibold leading-6 text-indigo-500 hover:text-black">
                             Sign in
                         </Link>
                     </p>

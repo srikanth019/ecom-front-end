@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../features/navbar/NavBar';
-import ProductList from '../features/productList/ProductList';
+import ProductList from '../features/product/components/ProductList';
 
 // #region component
 const propTypes = {};
