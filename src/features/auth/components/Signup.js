@@ -39,7 +39,11 @@ export default function Signup () {
                             className="space-y-6"
                             onSubmit={handleSubmit((data) => {
                                 console.log(/data/, data);
-                                const result = dispatch(createUserAsync({ email: data.email, password: data.password }));
+                                const result = dispatch(createUserAsync({
+                                    email: data.email,
+                                    password: data.password,
+                                    addresses: []
+                                }));
                                 if (!result.error || !error) {
                                     navigate('/login'); // Redirect to login page
                                 }

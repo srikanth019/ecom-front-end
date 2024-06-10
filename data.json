@@ -2436,36 +2436,55 @@
     {
       "id": "91be",
       "email": "sicadmin@mailinator.com",
-      "password": "Brain@2023"
+      "password": "Brain@2023",
+      "addresses": [
+        {
+          "id": "3",
+          "name": "Srikanth",
+          "email": "srikanth.golla@brainvire.com",
+          "phone": "+919505977263",
+          "street": "Sindu Bhavan",
+          "city": "Ahmedabad",
+          "state": "Gujrat",
+          "pinCode": "21313"
+        }
+      ]
     },
     {
       "id": "d72d",
       "email": "srikanth.golla@brainvire.com",
-      "password": "Brain@123"
+      "password": "Brain@123",
+      "addresses": []
     },
     {
       "id": "749b",
       "email": "srikanth.golla@brainvire.com",
-      "password": "Brain@2023"
+      "password": "Brain@2023",
+      "addresses": []
     }
   ],
   "cart": [
     {
-      "id": "3",
-      "title": "Samsung Universe 9",
-      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-      "price": 1249,
-      "discountPercentage": 15.46,
-      "rating": 4.09,
-      "stock": 36,
-      "brand": "Samsung",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+      "id": "31",
+      "title": "Mornadi Velvet Bed",
+      "description": "Mornadi Velvet Bed Base with Headboard Slats Support Classic Style Bedroom Furniture Bed Set",
+      "price": 40,
+      "discountPercentage": 17,
+      "rating": 4.16,
+      "stock": 140,
+      "brand": "Furniture Bed Set",
+      "category": "furniture",
+      "thumbnail": "https://i.dummyjson.com/data/products/31/thumbnail.jpg",
       "images": [
-        "https://i.dummyjson.com/data/products/3/1.jpg"
+        "https://i.dummyjson.com/data/products/31/1.jpg",
+        "https://i.dummyjson.com/data/products/31/2.jpg",
+        "https://i.dummyjson.com/data/products/31/3.jpg",
+        "https://i.dummyjson.com/data/products/31/4.jpg",
+        "https://i.dummyjson.com/data/products/31/thumbnail.jpg"
       ],
       "quantity": 1,
       "user": "91be"
     }
-  ]
+  ],
+  "orders": []
 }
