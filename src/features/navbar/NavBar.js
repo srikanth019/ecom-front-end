@@ -9,7 +9,9 @@ import {
     Transition,
 } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { selectItems } from '../cart/cartSlice'
 
 const user = {
     name: 'Tom Cook',
@@ -25,9 +27,9 @@ const navigation = [
     { name: 'Reports', href: '#', current: false },
 ]
 const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Your Profile', link: '#' },
+    { name: 'Settings', link: '#' },
+    { name: 'Sign out', link: '/login' },
 ]
 
 function classNames (...classes) {
@@ -35,6 +37,7 @@ function classNames (...classes) {
 }
 
 export default function NavBar ({ children }) {
+    const items = useSelector(selectItems);
     return (
         <>
             {/*
@@ -92,9 +95,9 @@ export default function NavBar ({ children }) {
                                                     <ShoppingCartIcon className="h-7 w-7 -mr-1" aria-hidden="true" />
                                                 </button>
                                             </Link>
-                                            <span className="inline-flex items-center mb-5 rounded-md bg-green-50 px-[6px] py-[2px] text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
-                                                3
-                                            </span>
+                                            {items?.length ? <span className="inline-flex items-center mb-5 rounded-md bg-green-50 px-[6px] py-[2px] text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
+                                                {items.length}
+                                            </span> : ""}
 
                                             {/* Profile dropdown */}
                                             <Menu as="div" className="relative ml-3">
@@ -117,7 +120,8 @@ export default function NavBar ({ children }) {
                                                         {userNavigation.map((item) => (
                                                             <MenuItem key={item.name}>
                                                                 {({ focus }) => (
-                                                                    <a
+                                                                    <Link
+                                                                        to={item.link}
                                                                         href={item.href}
                                                                         className={classNames(
                                                                             focus ? 'bg-gray-100' : '',
@@ -125,7 +129,7 @@ export default function NavBar ({ children }) {
                                                                         )}
                                                                     >
                                                                         {item.name}
-                                                                    </a>
+                                                                    </Link>
                                                                 )}
                                                             </MenuItem>
                                                         ))}
@@ -182,9 +186,9 @@ export default function NavBar ({ children }) {
                                             <span className="absolute -inset-1.5" />
                                             <ShoppingCartIcon className="h-7 w-7 -mr-1" aria-hidden="true" />
                                         </button>
-                                        <span className="inline-flex items-center mb-5 rounded-md bg-green-50 px-[6px] py-[2px] text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
-                                            3
-                                        </span>
+                                        {items?.length ? <span className="inline-flex items-center mb-5 rounded-md bg-green-50 px-[6px] py-[2px] text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
+                                            {items.length}
+                                        </span> : ""}
                                     </div>
                                     <div className="mt-3 space-y-1 px-2">
                                         {userNavigation.map((item) => (
