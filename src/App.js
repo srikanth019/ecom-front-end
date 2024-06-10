@@ -15,14 +15,12 @@ import Protected from './features/auth/components/Protected';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from './features/auth/AuthSlice';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Protected><Home /></Protected>,
-    // errorElement: <h1>
-    //   Page not found!
-    // </h1>,
   },
   {
     path: "/login",
@@ -43,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: '/product-detail/:id',
     element: <Protected><ProductDetailPage /></Protected>
+  },
+  {
+    path: "*",
+    element: <NotFound />
   },
 ])
 
