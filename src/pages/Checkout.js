@@ -13,7 +13,7 @@ import {
     updateUserAsync,
 } from '../features/auth/AuthSlice';
 import { useState } from 'react';
-import { createOrderAsync } from '../features/orders/OrderSlice';
+import { createOrderAsync, selectCurrentOrder } from '../features/orders/OrderSlice';
 
 //TODO: Error handling for form
 function Checkout () {
@@ -27,6 +27,8 @@ function Checkout () {
     console.log(errors);
     const user = useSelector(selectLoggedInUser);
     const items = useSelector(selectItems);
+    const currentOrder = useSelector(selectCurrentOrder);
+
     const totalAmount = items.reduce(
         (amount, item) => item.price * item.quantity + amount,
         0
@@ -56,7 +58,15 @@ function Checkout () {
 
 
     const handleOrder = (e) => {
-        const order = { items, totalAmount, totalItems, user, paymentMethod, selectedAddress }
+        const order = {
+            items,
+            totalAmount,
+            totalItems,
+            user,
+            paymentMethod,
+            selectedAddress,
+            status: "pending"  // other status can be delivered, received.
+        }
         dispatch(createOrderAsync(order))
         //TODO : Redirect to order-success page
         //TODO : clear cart after order
@@ -82,6 +92,7 @@ function Checkout () {
     return (
         <>
             {!items.length && <Navigate to="/" replace={true}></Navigate>}
+            {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} replace={true}></Navigate>}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                     <div className="lg:col-span-3">
