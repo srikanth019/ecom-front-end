@@ -29,7 +29,7 @@ const navigation = [
 const userNavigation = [
     { name: 'My Profile', link: '/profile' },
     { name: 'My orders', link: '/orders' },
-    { name: 'Sign out', link: '/login' },
+    { name: 'Sign out', link: '/logout' },
 ]
 
 function classNames (...classes) {
@@ -40,14 +40,6 @@ export default function NavBar ({ children }) {
     const items = useSelector(selectItems);
     return (
         <>
-            {/*
-          This requires updating your template:
-  
-          ```
-          <html class="h-full bg-gray-100">
-          <body class="h-full">
-          ```
-        */}
             <div className="min-h-full">
                 <Disclosure as="nav" className="bg-gray-800">
                     {({ open }) => (

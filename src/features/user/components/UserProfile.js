@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-    selectCount,
-} from '../userSlice';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectLoggedInUser } from '../../auth/AuthSlice';
 
-export default function Counter () {
-    const count = useSelector(selectCount);
-    const dispatch = useDispatch();
-
+export default function UserProfile () {
+    const user = useSelector(selectLoggedInUser);
 
     return (
         <div>
-            <div>
-
-
-            </div>
+            <h1>{user.name}</h1>
+            <h2>{user.email}</h2>
         </div>
     );
 }
