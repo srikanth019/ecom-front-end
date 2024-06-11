@@ -15,7 +15,7 @@ import Protected from './features/auth/components/Protected';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from './features/auth/AuthSlice';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/404';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import UserOrdersPage from './pages/UserOrdersPage';
 
