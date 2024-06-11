@@ -92,7 +92,7 @@ export default function ProductList () {
     setPage(page);
   }
 
-
+  // TODO : Server will filter deleted products
   useEffect(() => {
     const pagination = { _page: page, _per_page: ITEMS_PER_PAGE };
     dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
@@ -494,6 +494,12 @@ function ProductGrid ({ products }) {
                     </p>
                   </div>
                 </div>
+                {product.deleted && (
+                  <div>
+                    <p className="text-sm text-red-400">product deleted</p>
+                  </div>
+                )}
+                {/* will not be needed when backend is implemented */}
               </div>
             </Link>
           ))}

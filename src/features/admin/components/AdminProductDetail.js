@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { RadioGroup } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductByIdAsync, selectProductById } from '../ProductSlice';
-import { useNavigate, useParams } from 'react-router-dom';
+import { fetchProductByIdAsync, selectProductById } from '../../product/ProductSlice';
+import { useParams } from 'react-router-dom';
 import { addToCartAsync } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/AuthSlice';
 
@@ -30,31 +30,28 @@ const highlights = [
     'Dyed with our proprietary colors',
     'Pre-washed & pre-shrunk',
     'Ultra-soft 100% cotton',
-]
+];
 
 function classNames (...classes) {
     return classes.filter(Boolean).join(' ');
 }
 
-// TODO : Loading UI  
+// TODO : Loading UI
 
-export default function ProductDetail () {
+export default function AdminProductDetail () {
     const [selectedColor, setSelectedColor] = useState(colors[0]);
     const [selectedSize, setSelectedSize] = useState(sizes[2]);
+    const user = useSelector(selectLoggedInUser);
     const product = useSelector(selectProductById);
-    const user = useSelector(selectLoggedInUser)
     const dispatch = useDispatch();
-    const navigate = useNavigate()
     const params = useParams();
 
     const handleCart = (e) => {
         e.preventDefault();
-        const newProduct = { ...product, quantity: 1, user: user.id }
-        console.log(/newProduct/, newProduct);
-        // delete product.id;
-        dispatch(addToCartAsync(newProduct))
-        navigate('/cart')
-    }
+        const newItem = { ...product, quantity: 1, user: user.id };
+        delete newItem['id'];
+        dispatch(addToCartAsync(newItem));
+    };
 
     useEffect(() => {
         dispatch(fetchProductByIdAsync(params.id));
@@ -107,9 +104,7 @@ export default function ProductDetail () {
                     <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                         <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
                             <img
-                                //TODO: replace with real images
-                                // src={product.images[0]}
-                                src='https://media.istockphoto.com/id/1936538835/photo/e-money-transfer-contactless-payment-concept.webp?b=1&s=170667a&w=0&k=20&c=qIMX5ORkbVNCthACoSkSC0E1ixphzRWM5m7IRcR-bpY='
+                                src={product.images[0]}
                                 alt={product.title}
                                 className="h-full w-full object-cover object-center"
                             />
@@ -117,18 +112,14 @@ export default function ProductDetail () {
                         <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
                             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
                                 <img
-                                    //TODO: replace with real images
-                                    // src={product.images[0]}
-                                    src='https://media.istockphoto.com/id/1936538835/photo/e-money-transfer-contactless-payment-concept.webp?b=1&s=170667a&w=0&k=20&c=qIMX5ORkbVNCthACoSkSC0E1ixphzRWM5m7IRcR-bpY='
+                                    src={product.images[1]}
                                     alt={product.title}
                                     className="h-full w-full object-cover object-center"
                                 />
                             </div>
                             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
                                 <img
-                                    //TODO: replace with real images
-                                    // src={product.images[0]}
-                                    src='https://media.istockphoto.com/id/1936538835/photo/e-money-transfer-contactless-payment-concept.webp?b=1&s=170667a&w=0&k=20&c=qIMX5ORkbVNCthACoSkSC0E1ixphzRWM5m7IRcR-bpY='
+                                    src={product.images[2]}
                                     alt={product.title}
                                     className="h-full w-full object-cover object-center"
                                 />
@@ -136,9 +127,7 @@ export default function ProductDetail () {
                         </div>
                         <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
                             <img
-                                //TODO: replace with real images
-                                // src={product.images[0]}
-                                src='https://media.istockphoto.com/id/1936538835/photo/e-money-transfer-contactless-payment-concept.webp?b=1&s=170667a&w=0&k=20&c=qIMX5ORkbVNCthACoSkSC0E1ixphzRWM5m7IRcR-bpY='
+                                src={product.images[3]}
                                 alt={product.title}
                                 className="h-full w-full object-cover object-center"
                             />

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import { selectLoggedInUser, checkUserAsync, selectError } from '../AuthSlice';
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Login () {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const user = useSelector(selectLoggedInUser);
     const error = useSelector(selectError)
     console.log(/user/, user);
@@ -41,6 +42,14 @@ export default function Login () {
                                 dispatch(
                                     checkUserAsync({ email: data.email, password: data.password })
                                 );
+
+                                if (user && user.role !== 'admin') {
+                                    debugger
+                                    navigate('/')
+                                } else if (user && user.role === 'admin') {
+                                    navigate('/admin');
+                                }
+
                             })}
                             className="space-y-6"
                             action="#"

@@ -8,10 +8,14 @@ function LoginPage () {
     const user = useSelector(selectLoggedInUser);
     const navigate = useNavigate()
     useEffect(() => {
-        if (user) {
+        if (user && user.role !== 'admin') {
+            debugger
             navigate('/')
+        } else if (user && user.role === 'admin') {
+            navigate('/admin');
         }
     }, [user, navigate])
+
     return <div>
         <Login />
     </div>;

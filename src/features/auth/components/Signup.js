@@ -42,7 +42,9 @@ export default function Signup () {
                                 const result = dispatch(createUserAsync({
                                     email: data.email,
                                     password: data.password,
-                                    addresses: []
+                                    addresses: [],
+                                    role: 'user'
+                                    //TODO: this role can be directly given on backend
                                 }));
                                 if (!result.error || !error) {
                                     navigate('/login'); // Redirect to login page
@@ -61,6 +63,7 @@ export default function Signup () {
                                         {...register('email', {
                                             required: 'email is required',
                                             pattern: {
+                                                // eslint-disable-next-line no-useless-escape
                                                 value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
                                                 message: 'email not valid',
                                             },
