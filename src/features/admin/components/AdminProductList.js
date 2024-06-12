@@ -106,11 +106,6 @@ export default function AdminProductList () {
         dispatch(fetchCategoriesAsync());
     }, [dispatch]);
 
-    // useEffect(() => {
-    //     const pagination = { _page: page, _per_page: ITEMS_PER_PAGE };
-    //     dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
-    // }, []);
-
     return (
         <div className="bg-white">
             <div>
@@ -122,7 +117,7 @@ export default function AdminProductList () {
                 ></MobileFilter>
 
                 <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+                    <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-8">
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                             All Products
                         </h1>
@@ -150,8 +145,8 @@ export default function AdminProductList () {
                                 >
                                     <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <div className="py-1">
-                                            {sortOptions.map((option) => (
-                                                <Menu.Item key={option.name}>
+                                            {sortOptions.map((option, index) => (
+                                                <Menu.Item key={index}>
                                                     {({ active }) => (
                                                         <p
                                                             onClick={(e) => handleSort(e, option)}
@@ -457,6 +452,7 @@ function Pagination ({ page, setPage, handlePage, totalItems }) {
                         {Array.from({ length: totalPages }).map((el, index) => (
                             <div
                                 onClick={(e) => handlePage(index + 1)}
+                                key={index}
                                 aria-current="page"
                                 className={`relative cursor-pointer z-10 inline-flex items-center ${index + 1 === page
                                     ? 'bg-indigo-600 text-white'
@@ -492,7 +488,7 @@ function ProductGrid ({ products }) {
                                 <div className="group relative border-solid border-2 p-2 border-gray-200">
                                     <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                                         <img
-                                            src={"https://media.istockphoto.com/id/1180940003/photo/colors-of-autumn-in-a-public-domain-park-in-riga-latvia.webp?b=1&s=170667a&w=0&k=20&c=2gLe1xYvyauEDd2Ij7MMKVRfQP0kc85jRl9yLxdp200="}
+                                            src={"https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg"}
                                             alt={product.title}
                                             className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                                         />
@@ -509,8 +505,8 @@ function ProductGrid ({ products }) {
                                                 </div>
                                             </h3>
                                             <p className="mt-1 text-sm text-gray-500">
-                                                <StarIcon className="w-6 h-6 inline"></StarIcon>
-                                                <span className=" align-bottom">{product.rating}</span>
+                                                <StarIcon className="w-4 h-4 inline mb-0.5" fill='green'></StarIcon>
+                                                <span className="ml-1">{product.rating}</span>
                                             </p>
                                         </div>
                                         <div>

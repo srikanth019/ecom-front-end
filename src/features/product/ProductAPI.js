@@ -31,15 +31,12 @@ export function fetchProductsByFilters (filter, sort, pagination) {
     queryString += `${key}=${pagination[key]}&`
   }
 
-  console.log(/pagination/, queryString);
-
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
     const response = await fetch('http://localhost:8080/products?' + queryString)
     // const response = await fetch('http://localhost:8080/products?_page=1&_per_page=1&')
 
     const data = await response.json()
-    console.log(/apiData/, data);
     resolve({ data })
   }
   );

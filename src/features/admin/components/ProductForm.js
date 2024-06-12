@@ -9,7 +9,7 @@ import {
     updateProductAsync,
 } from '../../product/ProductSlice';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 function ProductForm () {
@@ -25,6 +25,8 @@ function ProductForm () {
     const dispatch = useDispatch();
     const params = useParams();
     const selectedProduct = useSelector(selectProductById);
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (params.id) {
@@ -76,16 +78,17 @@ function ProductForm () {
                 product.price = +product.price;
                 product.stock = +product.stock;
                 product.discountPercentage = +product.discountPercentage;
-                console.log(product);
 
                 if (params.id) {
                     product.id = params.id;
                     product.rating = selectedProduct.rating || 0;
                     dispatch(updateProductAsync(product));
                     reset();
+                    navigate('/admin')
                 } else {
                     dispatch(createProductAsync(product));
                     reset();
+                    navigate('/admin')
                     //TODO:  on product successfully added clear fields and show a message
                 }
             })}

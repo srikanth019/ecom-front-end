@@ -9,7 +9,6 @@ export default function Login () {
     const navigate = useNavigate()
     const user = useSelector(selectLoggedInUser);
     const error = useSelector(selectError)
-    console.log(/user/, user);
 
     const {
         register,

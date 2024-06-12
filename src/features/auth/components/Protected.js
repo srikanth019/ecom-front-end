@@ -4,7 +4,6 @@ import { selectLoggedInUser } from "../AuthSlice";
 
 function Protected ({ children }) {
     const user = useSelector(selectLoggedInUser)
-    console.log(/user/, user);
 
     if (!user) {
         return <Navigate to='/login' replace={true}></Navigate>

@@ -2,9 +2,9 @@
   "products": [
     {
       "id": "1",
-      "title": "iPhone 9",
+      "title": "iPhone 13",
       "description": "An apple mobile which is nothing like apple",
-      "price": 549,
+      "price": 5493,
       "discountPercentage": 12.96,
       "rating": 4.69,
       "stock": 94,
@@ -20,7 +20,7 @@
     },
     {
       "id": "2",
-      "title": "iPhone X",
+      "title": "iPhone X13",
       "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
       "price": 899,
       "discountPercentage": 17.94,
@@ -53,9 +53,9 @@
     },
     {
       "id": "4",
-      "title": "OPPOF19",
+      "title": "OPPOF19 pro ",
       "description": "OPPO F19 is officially announced on April 2021.",
-      "price": 280,
+      "price": 2801,
       "discountPercentage": 17.91,
       "rating": 4.3,
       "stock": 123,
@@ -66,7 +66,6 @@
         "https://i.dummyjson.com/data/products/4/1.jpg",
         "https://i.dummyjson.com/data/products/4/2.jpg",
         "https://i.dummyjson.com/data/products/4/3.jpg",
-        "https://i.dummyjson.com/data/products/4/4.jpg",
         "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
       ]
     },
@@ -1837,6 +1836,24 @@
         "https://i.dummyjson.com/data/products/100/3.jpg",
         "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
       ]
+    },
+    {
+      "id": "910d",
+      "title": "ifjhoifhf",
+      "description": "Hello",
+      "brand": "Apple",
+      "category": "smartphones",
+      "price": 217,
+      "discountPercentage": 12,
+      "stock": 3512,
+      "thumbnail": "https://www.aptronixindia.com/media/catalog/product/cache/31f0162e6f7d821d2237f39577122a8a/i/p/iphone_14_pro_deep_purple_pdp_image_position-1a_avail__en-in-removebg-preview.png",
+      "images": [
+        "https://www.aptronixindia.com/media/catalog/product/cache/31f0162e6f7d821d2237f39577122a8a/i/p/iphone_14_pro_deep_purple_pdp_image_position-1a_avail__en-in-removebg-preview.png",
+        "https://www.aptronixindia.com/media/catalog/product/cache/31f0162e6f7d821d2237f39577122a8a/i/p/iphone_14_pro_deep_purple_pdp_image_position-1a_avail__en-in-removebg-preview.png",
+        "https://www.aptronixindia.com/media/catalog/product/cache/31f0162e6f7d821d2237f39577122a8a/i/p/iphone_14_pro_deep_purple_pdp_image_position-1a_avail__en-in-removebg-preview.png",
+        "https://www.aptronixindia.com/media/catalog/product/cache/31f0162e6f7d821d2237f39577122a8a/i/p/iphone_14_pro_deep_purple_pdp_image_position-1a_avail__en-in-removebg-preview.png"
+      ],
+      "rating": 0
     }
   ],
   "brands": [
