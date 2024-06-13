@@ -446,6 +446,11 @@ function ProductGrid ({ products, status }) {
                   </div>
                 )}
                 {/* will not be needed when backend is implemented */}
+                {product.stock <= 0 && (
+                  <div>
+                    <p className="text-sm text-red-400">out of stock</p>
+                  </div>
+                )}
               </div>
             </Link>
           ))}
