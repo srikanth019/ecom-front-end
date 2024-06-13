@@ -4,7 +4,7 @@ import { RadioGroup } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductByIdAsync, selectProductById, selectProductListStatus } from '../ProductSlice';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addToCartAsync } from '../../cart/cartSlice';
+import { addToCartAsync, selectItems } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/AuthSlice';
 import { discountedPrice } from '../../../app/constants';
 import { RotatingLines } from 'react-loader-spinner'
@@ -47,17 +47,35 @@ export default function ProductDetail () {
     const product = useSelector(selectProductById);
     const user = useSelector(selectLoggedInUser)
     const status = useSelector(selectProductListStatus);
-
+    const items = useSelector(selectItems);
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const params = useParams();
 
     const handleCart = (e) => {
         e.preventDefault();
-        const newProduct = { ...product, quantity: 1, user: user.id }
-        // delete product.id;
-        dispatch(addToCartAsync(newProduct))
-        navigate('/cart')
+        // const newProduct = { ...product, quantity: 1, user: user.id }
+        // // delete product.id;
+        // dispatch(addToCartAsync(newProduct))
+        // navigate('/cart')
+
+        if (items.findIndex((item) => item.productId === product.id) < 0) {
+            console.log({ items, product });
+            const newItem = {
+                ...product,
+                productId: product.id,
+                quantity: 1,
+                user: user.id,
+            };
+            delete newItem['id'];
+            dispatch(addToCartAsync(newItem));
+            navigate("/cart");
+            // TODO: it will be based on server response of backend
+            // alert('Item added to Cart');
+        } else {
+            alert('Item Already added in the cart');
+            navigate("/cart");
+        }
     }
 
     useEffect(() => {
