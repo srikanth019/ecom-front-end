@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   fetchBrandsAsync,
@@ -8,6 +9,7 @@ import {
   selectAllProducts,
   selectBrands,
   selectCategories,
+  selectProductListStatus,
   totalProducts,
 } from '../ProductSlice';
 
@@ -26,6 +28,7 @@ import {
 import { ITEMS_PER_PAGE } from '../../../app/constants';
 
 import Pagination from '../../common/Pagination';
+import { RotatingLines } from 'react-loader-spinner';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -43,6 +46,7 @@ export default function ProductList () {
   const totalItems = useSelector(totalProducts);
   const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
+  const status = useSelector(selectProductListStatus);
 
   const filters = [
     {
@@ -194,7 +198,7 @@ export default function ProductList () {
               <DesktopFilter handleFilter={handleFilter} filters={filters}></DesktopFilter>
               {/* Product grid */}
               <div className="lg:col-span-3">
-                <ProductGrid products={products}></ProductGrid>
+                <ProductGrid products={products} status={status}></ProductGrid>
               </div>
               {/* Product grid end */}
             </div>
@@ -383,80 +387,24 @@ function DesktopFilter ({ handleFilter, filters }) {
   );
 }
 
-// function Pagination ({ page, handlePage, totalItems }) {
-//   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-//   return (
-//     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-//       <div className="flex flex-1 justify-between sm:hidden">
-//         <div
-//           onClick={(e) => handlePage(page > 1 ? page - 1 : page)}
-//           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-//         >
-//           Previous
-//         </div>
-//         <div
-//           onClick={(e) => handlePage(page < totalPages ? page + 1 : page)}
-//           className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-//         >
-//           Next
-//         </div>
-//       </div>
-//       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-//         <div>
-//           <p className="text-sm text-gray-700">
-//             Showing <span className="font-medium">{(page - 1) * ITEMS_PER_PAGE + 1}</span> to{' '}
-//             <span className="font-medium">{page * ITEMS_PER_PAGE > totalItems ? totalItems : page * ITEMS_PER_PAGE}</span> of{' '}
-//             <span className="font-medium">{totalItems}</span> results
-//           </p>
-//         </div>
-//         <div>
-//           <nav
-//             className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-//             aria-label="Pagination"
-//           >
-//             <div
-//               onClick={(e) => handlePage(page > 1 ? page - 1 : page)}
-//               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-//             >
-//               <span className="sr-only">Previous</span>
-//               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-//             </div>
-//             {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
-//             {Array.from({ length: totalPages }).map(
-//               (el, index) => (
-//                 <div
-//                   key={index}
-//                   onClick={(e) => handlePage(index + 1)}
-//                   aria-current="page"
-//                   className={`relative cursor-pointer z-10 inline-flex items-center ${index + 1 === page
-//                     ? 'bg-indigo-600 text-white'
-//                     : 'text-gray-400'
-//                     } border border-gray-600 px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:bg-indigo-200`}
-//                 >
-//                   {index + 1}
-//                 </div>
-//               )
-//             )}''
-
-//             <div
-//               onClick={(e) => handlePage(page < totalPages ? page + 1 : page)}
-//               className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-//             >
-//               <span className="sr-only">Next</span>
-//               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-//             </div>
-//           </nav>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-function ProductGrid ({ products }) {
+function ProductGrid ({ products, status }) {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          {status === 'loading' ? (
+            <RotatingLines
+              visible={true}
+              height="96"
+              width="96"
+              color="grey"
+              strokeWidth="5"
+              animationDuration="0.75"
+              ariaLabel="rotating-lines-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          ) : null}
           {products?.map((product) => (
             <Link to={`/product-detail/${product.id}`} key={product.id}>
               <div className="group relative border-solid border-2 p-2 border-gray-200">

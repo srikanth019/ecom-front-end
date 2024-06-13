@@ -9,7 +9,6 @@ function LoginPage () {
     const navigate = useNavigate()
     useEffect(() => {
         if (user && user.role !== 'admin') {
-            debugger
             navigate('/')
         } else if (user && user.role === 'admin') {
             navigate('/admin');

@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { RadioGroup } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductByIdAsync, selectProductById } from '../ProductSlice';
+import { fetchProductByIdAsync, selectProductById, selectProductListStatus } from '../ProductSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addToCartAsync } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/AuthSlice';
 import { discountedPrice } from '../../../app/constants';
+import { RotatingLines } from 'react-loader-spinner'
 
 // TODO: In server data we will add colors, sizes , highlights. to each product
 
@@ -42,8 +43,11 @@ function classNames (...classes) {
 export default function ProductDetail () {
     const [selectedColor, setSelectedColor] = useState(colors[0]);
     const [selectedSize, setSelectedSize] = useState(sizes[2]);
+
     const product = useSelector(selectProductById);
     const user = useSelector(selectLoggedInUser)
+    const status = useSelector(selectProductListStatus);
+
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const params = useParams();
@@ -62,7 +66,20 @@ export default function ProductDetail () {
 
     return (
         <div className="bg-white">
-            {product && (
+            {status === 'loading' ? (
+                <RotatingLines
+                    visible={true}
+                    height="96"
+                    width="96"
+                    color="grey"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    ariaLabel="rotating-lines-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                />
+            ) : null}
+            {product && status !== 'loading' && (
                 <div className="pt-6">
                     <nav aria-label="Breadcrumb">
                         <ol
@@ -103,7 +120,7 @@ export default function ProductDetail () {
                         </ol>
                     </nav>
 
-                    {/* Image gallery */}
+
                     <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                         <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
                             <img
@@ -145,7 +162,7 @@ export default function ProductDetail () {
                         </div>
                     </div>
 
-                    {/* Product info */}
+
                     <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
                         <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
@@ -153,7 +170,7 @@ export default function ProductDetail () {
                             </h1>
                         </div>
 
-                        {/* Options */}
+
                         <div className="mt-4 lg:row-span-3 lg:mt-0">
                             <h2 className="sr-only">Product information</h2>
                             <p className="text-xl line-through tracking-tight text-gray-900">
@@ -163,7 +180,7 @@ export default function ProductDetail () {
                                 ${discountedPrice(product)}
                             </p>
 
-                            {/* Reviews */}
+
                             <div className="mt-6">
                                 <h3 className="sr-only">Reviews</h3>
                                 <div className="flex items-center">
@@ -186,7 +203,7 @@ export default function ProductDetail () {
                             </div>
 
                             <form className="mt-10">
-                                {/* Colors */}
+
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
@@ -228,7 +245,6 @@ export default function ProductDetail () {
                                     </RadioGroup>
                                 </div>
 
-                                {/* Sizes */}
                                 <div className="mt-10">
                                     <div className="flex items-center justify-between">
                                         <h3 className="text-sm font-medium text-gray-900">Size</h3>
@@ -320,7 +336,6 @@ export default function ProductDetail () {
                         </div>
 
                         <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-                            {/* Description and details */}
                             <div>
                                 <h3 className="sr-only">Description</h3>
 

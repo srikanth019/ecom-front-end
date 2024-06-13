@@ -23,7 +23,7 @@ export default function Login () {
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
                         className="mx-auto h-10 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                        src="/ecommerce.png"
                         alt="Your Company"
                     />
 
@@ -43,7 +43,6 @@ export default function Login () {
                                 );
 
                                 if (user && user.role !== 'admin') {
-                                    debugger
                                     navigate('/')
                                 } else if (user && user.role === 'admin') {
                                     navigate('/admin');

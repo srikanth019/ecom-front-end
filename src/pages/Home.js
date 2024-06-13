@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../features/navbar/NavBar';
 import ProductList from '../features/product/components/ProductList';
-import { Link, } from 'react-router-dom';
+import Footer from '../features/common/Footer';
 
 // #region component
 const propTypes = {};
@@ -14,7 +14,7 @@ function Home () {
         <NavBar>
             <ProductList></ProductList>
         </NavBar>
-        <Link to={'/admin'}>Admin</Link>
+        <Footer />
     </div>;
 }
 

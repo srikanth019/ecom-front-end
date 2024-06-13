@@ -143,6 +143,7 @@ export const { clearSelectedProduct } = productSlice.actions;
 export const selectAllProducts = (state) => state.product.products.data;
 export const totalProducts = (state) => state.product.products.items;
 export const selectProductById = (state) => state.product.selectedProduct;
+export const selectProductListStatus = (state) => state.product.status;
 
 export const selectBrands = (state) => state.product.brands;
 export const selectCategories = (state) => state.product.categories;
