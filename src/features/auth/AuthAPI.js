@@ -14,25 +14,19 @@ export function createUser (userData) {
 export function checkUser (loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      const email = loginInfo.email;
-      const password = loginInfo.password;
-      const response = await fetch('http://localhost:8080/users?email=' + email);
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      const response = await fetch('http://localhost:8080/api/v1/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(loginInfo),
+        headers: { 'content-type': 'application/json' },
+      });
 
       const data = await response.json();
-
-      if (data.length) {
-        if (password === data[0].password) {
-          resolve({ data: data[0] });
-        } else {
-          reject(new Error('wrong credentials'));
-        }
+      if (data.success) {
+        resolve({ data: data.data });
       } else {
-        reject(new Error('user not found'));
+        reject(new Error('wrong credentials'));
       }
+
     } catch (error) {
       reject(new Error('Network error or invalid JSON'));
     }

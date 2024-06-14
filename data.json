@@ -2659,6 +2659,109 @@
         "pinCode": "21313"
       },
       "status": "pending"
+    },
+    {
+      "id": "3af2",
+      "items": [
+        {
+          "id": "f62b",
+          "title": "iPhone 13",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 5493,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 0,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/1/1.jpg",
+            "https://i.dummyjson.com/data/products/1/2.jpg",
+            "https://i.dummyjson.com/data/products/1/3.jpg",
+            "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+          ],
+          "deleted": true,
+          "productId": "1",
+          "quantity": 2,
+          "user": "91be"
+        },
+        {
+          "id": "2c34",
+          "title": "iPhone X13",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "deleted": true,
+          "productId": "2",
+          "quantity": 1,
+          "user": "91be"
+        },
+        {
+          "id": "a876",
+          "title": "Huawei P30",
+          "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+          "price": 499,
+          "discountPercentage": 10.58,
+          "rating": 4.09,
+          "stock": 32,
+          "brand": "Huawei",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/5/1.jpg",
+            "https://i.dummyjson.com/data/products/5/2.jpg",
+            "https://i.dummyjson.com/data/products/5/3.jpg"
+          ],
+          "productId": "5",
+          "quantity": 1,
+          "user": "91be"
+        }
+      ],
+      "totalAmount": 10746,
+      "totalItems": 4,
+      "user": {
+        "id": "91be",
+        "name": "Srikanth",
+        "imageUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        "email": "sicadmin@mailinator.com",
+        "password": "Brain@2023",
+        "addresses": [
+          {
+            "id": "3",
+            "name": "Srikanth",
+            "email": "srikanth.golla@brainvire.com",
+            "phone": "+919505977263",
+            "street": "Sindu Bhavan",
+            "city": "Ahmedabad",
+            "state": "Gujrat",
+            "pinCode": "21313"
+          }
+        ],
+        "role": "user"
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "id": "3",
+        "name": "Srikanth",
+        "email": "srikanth.golla@brainvire.com",
+        "phone": "+919505977263",
+        "street": "Sindu Bhavan",
+        "city": "Ahmedabad",
+        "state": "Gujrat",
+        "pinCode": "21313"
+      },
+      "status": "pending"
     }
   ]
 }
