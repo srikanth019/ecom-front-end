@@ -21,6 +21,7 @@ function ProductForm () {
         reset,
         formState: { errors },
     } = useForm();
+    console.log(/errors/, errors);
     const brands = useSelector(selectBrands);
     const categories = useSelector(selectCategories);
     const dispatch = useDispatch();
@@ -69,7 +70,7 @@ function ProductForm () {
             <form
                 noValidate
                 onSubmit={handleSubmit((data) => {
-                    console.log(data);
+                    console.log(/data/, data);
                     const product = { ...data };
                     product.images = [
                         product.image1,
@@ -463,7 +464,8 @@ function ProductForm () {
             </form>
 
             <Modal
-                title={`Delete ${selectedProduct.title}`}
+                // title={`Delete ${selectedProduct.title}`}
+                title={`Delete Product`}
                 message="Are you sure you want to delete this Product ?"
                 dangerOption="Delete"
                 cancelOption="Cancel"

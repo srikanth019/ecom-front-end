@@ -120,10 +120,19 @@ export default function ProductList () {
         ></MobileFilter>
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               All Products
             </h1>
+            <form>
+              <input type='text' className='rounded-md'></input>
+              <button
+                className="rounded-md bg-green-600 px-3 py-2.5 ml-3 mb-1 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                search
+              </button>
+
+            </form>
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
@@ -406,11 +415,11 @@ function ProductGrid ({ products, status }) {
             />
           ) : null}
           {products?.map((product) => (
-            <Link to={`/product-detail/${product.id}`} key={product.id}>
+            <Link to={`/product-detail/${product._id}`} key={product._id}>
               <div className="group relative border-solid border-2 p-2 border-gray-200">
                 <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                   <img
-                    src={"https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg" || product.thumbnail}
+                    src={product.thumbnail}
                     alt={product.title}
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                   />

@@ -3,12 +3,15 @@ import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import { selectLoggedInUser, checkUserAsync, selectError } from '../AuthSlice';
 import { useDispatch, useSelector } from "react-redux";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
+import { useState } from "react";
 
 export default function Login () {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const user = useSelector(selectLoggedInUser);
     const error = useSelector(selectError)
+    const [eyeIcon, setEyeIcon] = useState(false)
 
     const {
         register,
@@ -82,16 +85,17 @@ export default function Login () {
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                                     Password
                                 </label>
-                                <div className="mt-2">
+                                <div className="mt-2 relative">
                                     <input
                                         id="password"
                                         name="password"
-                                        type="password"
+                                        type={eyeIcon ? 'text' : 'password'}
                                         {...register('password', {
                                             required: 'password is required',
                                         })}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        className="block w-full rounded-md border-0 py-1.5 pr-7 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
+                                    <span className="absolute right-2 top-2" onClick={() => setEyeIcon((prev) => !prev)}>{eyeIcon ? <EyeIcon className="w-5 h-5" /> : <EyeSlashIcon className="w-5 h-5" />}</span>
                                     <div className="text-sm mt-1">
                                         <Link
                                             to="/forgot-password"

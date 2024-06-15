@@ -143,8 +143,7 @@ export default function ProductDetail () {
                         <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
                             <img
                                 //TODO: replace with real images
-                                // src={product.images[0]}
-                                src='https://media.istockphoto.com/id/1936538835/photo/e-money-transfer-contactless-payment-concept.webp?b=1&s=170667a&w=0&k=20&c=qIMX5ORkbVNCthACoSkSC0E1ixphzRWM5m7IRcR-bpY='
+                                src={product.images[0]}
                                 alt={product.title}
                                 className="h-full w-full object-cover object-center"
                             />
@@ -153,8 +152,7 @@ export default function ProductDetail () {
                             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
                                 <img
                                     //TODO: replace with real images
-                                    // src={product.images[0]}
-                                    src='https://media.istockphoto.com/id/1936538835/photo/e-money-transfer-contactless-payment-concept.webp?b=1&s=170667a&w=0&k=20&c=qIMX5ORkbVNCthACoSkSC0E1ixphzRWM5m7IRcR-bpY='
+                                    src={product.images[0]}
                                     alt={product.title}
                                     className="h-full w-full object-cover object-center"
                                 />
@@ -162,8 +160,7 @@ export default function ProductDetail () {
                             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
                                 <img
                                     //TODO: replace with real images
-                                    // src={product.images[0]}
-                                    src='https://media.istockphoto.com/id/1936538835/photo/e-money-transfer-contactless-payment-concept.webp?b=1&s=170667a&w=0&k=20&c=qIMX5ORkbVNCthACoSkSC0E1ixphzRWM5m7IRcR-bpY='
+                                    src={product.images[0]}
                                     alt={product.title}
                                     className="h-full w-full object-cover object-center"
                                 />
@@ -172,8 +169,7 @@ export default function ProductDetail () {
                         <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
                             <img
                                 //TODO: replace with real images
-                                // src={product.images[0]}
-                                src='https://media.istockphoto.com/id/1936538835/photo/e-money-transfer-contactless-payment-concept.webp?b=1&s=170667a&w=0&k=20&c=qIMX5ORkbVNCthACoSkSC0E1ixphzRWM5m7IRcR-bpY='
+                                src={product.images[0]}
                                 alt={product.title}
                                 className="h-full w-full object-cover object-center"
                             />

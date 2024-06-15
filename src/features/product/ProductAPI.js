@@ -33,11 +33,11 @@ export function fetchProductsByFilters (filter, sort, pagination) {
 
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
-    const response = await fetch('http://localhost:8080/products?' + queryString)
-    // const response = await fetch('http://localhost:8080/products?_page=1&_per_page=1&')
+    const response = await fetch('http://localhost:8080/api/v1/products?' + queryString)
+    // const response = await fetch('http://localhost:8080/products?_page=1&_per_page=10&')
 
     const data = await response.json()
-    resolve({ data })
+    resolve({ data: data.data })
   }
   );
 }
@@ -45,7 +45,7 @@ export function fetchProductsByFilters (filter, sort, pagination) {
 export function fetchProductById (id) {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
-    const response = await fetch('http://localhost:8080/products/' + id)
+    const response = await fetch('http://localhost:8080/api/v1/products/' + id)
     const data = await response.json()
     resolve({ data })
   })
