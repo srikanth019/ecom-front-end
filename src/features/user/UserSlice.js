@@ -66,7 +66,7 @@ export const userSlice = createSlice({
             .addCase(fetchLoggedInUserAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
                 // this info can be different or more from logged-in User info
-                state.userInfo = action.payload;
+                state.userInfo = action.payload?.data;
             });
     },
 });

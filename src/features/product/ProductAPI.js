@@ -1,45 +1,59 @@
+import { serializeQueryParams } from '../../utils';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api/v1';
+
 export function fetchAllProducts () {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
-    const response = await fetch('http://localhost:8080/products')
+    const response = await fetch(`${API_BASE_URL}/products`)
     const data = await response.json()
     resolve({ data })
   }
   );
 }
+// const response = await fetch('http://localhost:8080/products?_page=1&_per_page=10&')
 
-export function fetchProductsByFilters (filter, sort, pagination) {
-  // TODO : on server we will support multi values for category
-  // filter = {"category":["smartphone", "cloths"]}
-  // sort = {_sort: "price", _order: "asc"}
-  let queryString = '';
-  for (let key in filter) {
+export async function fetchProductsByFilters (filter = {}, sort = {}, pagination = {}) {
+  const { _sort, _order } = sort;
+  const { _page, _per_page } = pagination;
+  const { category, brand, search } = filter
 
-    //Get result for last selected category values as of now
-    const categoryValues = filter[key];
-    if (categoryValues.length > 0) {
-      const lastCategoryValue = categoryValues[categoryValues.length - 1];
-      queryString += `${key}=${lastCategoryValue}&`
+  // Construct the query parameters
+  const queryParams = {
+    _sort,
+    _order,
+    _page,
+    _per_page,
+    category,
+    brand,
+    search
+  };
+
+  // Remove undefined or empty parameters
+  Object.keys(queryParams).forEach(key => {
+    if (queryParams[key] === undefined || (Array.isArray(queryParams[key]) && queryParams[key].length === 0)) {
+      delete queryParams[key];
     }
-  }
+  });
 
-  for (const key in sort) {
-    queryString += `${key}=${sort[key]}&`
-  }
+  const queryString = serializeQueryParams(queryParams);
 
-  for (const key in pagination) {
-    queryString += `${key}=${pagination[key]}&`
-  }
+  try {
+    const response = await fetch(`${API_BASE_URL}/products?${queryString}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-  return new Promise(async (resolve) => {
-    //TODO: we will not hard-code server URL here
-    const response = await fetch('http://localhost:8080/api/v1/products?' + queryString)
-    // const response = await fetch('http://localhost:8080/products?_page=1&_per_page=10&')
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
 
-    const data = await response.json()
-    resolve({ data: data.data })
+    const data = await response.json();
+    return { data: data.data };
+  } catch (error) {
+    throw error;
   }
-  );
 }
 
 export function fetchProductById (id) {
@@ -54,7 +68,7 @@ export function fetchProductById (id) {
 
 export function fetchCategories () {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/categories')
+    const response = await fetch('http://localhost:8080/api/v1/categories')
     const data = await response.json()
     resolve({ data })
   }
@@ -63,7 +77,7 @@ export function fetchCategories () {
 
 export function fetchBrands () {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/brands')
+    const response = await fetch('http://localhost:8080/api/v1/brands')
     const data = await response.json()
     resolve({ data })
   }

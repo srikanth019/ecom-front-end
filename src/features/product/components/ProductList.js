@@ -29,6 +29,7 @@ import { ITEMS_PER_PAGE } from '../../../app/constants';
 
 import Pagination from '../../common/Pagination';
 import { RotatingLines } from 'react-loader-spinner';
+import { useForm } from 'react-hook-form';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -47,6 +48,7 @@ export default function ProductList () {
   const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
   const status = useSelector(selectProductListStatus);
+  const { register, handleSubmit, reset } = useForm();
 
   const filters = [
     {
@@ -56,7 +58,7 @@ export default function ProductList () {
     },
     {
       id: 'brand',
-      name: 'brands',
+      name: 'brand',
       options: brands,
     },
   ];
@@ -94,6 +96,12 @@ export default function ProductList () {
     setPage(page);
   }
 
+  const handleSearch = (search) => {
+    reset();
+    setPage(1);
+    dispatch(fetchProductsByFiltersAsync({ filter: search, sort, pagination: { _page: 1, _per_page: ITEMS_PER_PAGE } }));
+  }
+
   // TODO : Server will filter deleted products
   useEffect(() => {
     const pagination = { _page: page, _per_page: ITEMS_PER_PAGE };
@@ -120,12 +128,20 @@ export default function ProductList () {
         ></MobileFilter>
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-5">
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900">
               All Products
             </h1>
-            <form>
-              <input type='text' className='rounded-md'></input>
+            <form
+              onSubmit={handleSubmit((data) => handleSearch(data))}
+            >
+              <input
+                type='text'
+                className='rounded-md'
+                placeholder='search'
+                name='search'
+                {...register('search')}
+              />
               <button
                 className="rounded-md bg-green-600 px-3 py-2.5 ml-3 mb-1 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
@@ -133,7 +149,6 @@ export default function ProductList () {
               </button>
 
             </form>
-
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
@@ -414,55 +429,61 @@ function ProductGrid ({ products, status }) {
               wrapperClass=""
             />
           ) : null}
-          {products?.map((product) => (
-            <Link to={`/product-detail/${product._id}`} key={product._id}>
-              <div className="group relative border-solid border-2 p-2 border-gray-200">
-                <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
-                  <img
-                    src={product.thumbnail}
-                    alt={product.title}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
+          {products.length ?
+            products?.map((product) => (
+              <Link to={`/product-detail/${product._id}`} key={product._id}>
+                <div className="group relative border-solid border-2 p-2 border-gray-200">
+                  <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
+                    <img
+                      src={product.thumbnail}
+                      alt={product.title}
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    />
+                  </div>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-sm text-gray-700">
+                        <div href={product.thumbnail}>
+                          <span aria-hidden="true" className="absolute inset-0" />
+                          {product.title}
+                        </div>
+                      </h3>
+                      <p className="mt-1 text-sm text-gray-500">
+                        <StarIcon className="w-6 h-6 inline"></StarIcon>
+                        <span className=" align-bottom">{product.rating}</span>
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm block font-medium text-gray-900">
+                        $
+                        {Math.round(
+                          product.price * (1 - product.discountPercentage / 100)
+                        )}
+                      </p>
+                      <p className="text-sm block line-through font-medium text-gray-400">
+                        ${product.price}
+                      </p>
+                    </div>
+                  </div>
+                  {product.deleted && (
+                    <div>
+                      <p className="text-sm text-red-400">product deleted</p>
+                    </div>
+                  )}
+                  {/* will not be needed when backend is implemented */}
+                  {product.stock <= 0 && (
+                    <div>
+                      <p className="text-sm text-red-400">out of stock</p>
+                    </div>
+                  )}
                 </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      <div href={product.thumbnail}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.title}
-                      </div>
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">
-                      <StarIcon className="w-6 h-6 inline"></StarIcon>
-                      <span className=" align-bottom">{product.rating}</span>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm block font-medium text-gray-900">
-                      $
-                      {Math.round(
-                        product.price * (1 - product.discountPercentage / 100)
-                      )}
-                    </p>
-                    <p className="text-sm block line-through font-medium text-gray-400">
-                      ${product.price}
-                    </p>
-                  </div>
-                </div>
-                {product.deleted && (
-                  <div>
-                    <p className="text-sm text-red-400">product deleted</p>
-                  </div>
-                )}
-                {/* will not be needed when backend is implemented */}
-                {product.stock <= 0 && (
-                  <div>
-                    <p className="text-sm text-red-400">out of stock</p>
-                  </div>
-                )}
-              </div>
-            </Link>
-          ))}
+              </Link>
+            )) :
+
+            <div className="mt-4 space-y-6">
+              <p className="text-2xl text-red-600">No products found</p>
+            </div>
+          }
         </div>
       </div>
     </div>
