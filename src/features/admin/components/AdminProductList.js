@@ -484,11 +484,11 @@ function ProductGrid ({ products }) {
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                     {products && products?.map((product) => (
                         <div>
-                            <Link to={`/product-detail/${product.id}`} key={product.id}>
+                            <Link to={`/product-detail/${product._id}`} key={product.id}>
                                 <div className="group relative border-solid border-2 p-2 border-gray-200">
                                     <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                                         <img
-                                            src={"https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg"}
+                                            src={product.thumbnail}
                                             alt={product.title}
                                             className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                                         />
@@ -518,7 +518,7 @@ function ProductGrid ({ products }) {
                                             </p>
                                         </div>
                                     </div>
-                                    {product.deleted && (
+                                    {product.is_deleted && (
                                         <div>
                                             <p className="text-sm text-red-400">product deleted</p>
                                         </div>
@@ -527,12 +527,13 @@ function ProductGrid ({ products }) {
                             </Link>
                             <div className="mt-5">
                                 <Link
-                                    to={`/admin/product-form/edit/${product.id}`}
+                                    to={`/admin/product-form/edit/${product._id}`}
                                     className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Edit Product
                                 </Link>
                             </div>
+
                         </div>
                     ))}
                 </div>

@@ -59,11 +59,17 @@ function ProductForm () {
 
     const handleDelete = () => {
         const product = { ...selectedProduct };
-        product.deleted = true;
+        product.is_deleted = true;
         dispatch(updateProductAsync(product));
         navigate('/admin')
     }
 
+    const handleRestore = () => {
+        const product = { ...selectedProduct };
+        product.is_deleted = false;
+        dispatch(updateProductAsync(product));
+        navigate('/admin')
+    }
 
     return (
         <>
@@ -148,6 +154,9 @@ function ProductForm () {
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         defaultValue={''}
                                     />
+                                    {errors.description &&
+                                        (<p className="mt-2 text-sm text-red-600">{errors.description.message}</p>)
+                                    }
                                 </div>
                                 <p className="mt-3 text-sm leading-6 text-gray-600">
                                     Write a few sentences about product.
@@ -163,15 +172,21 @@ function ProductForm () {
                                 </label>
                                 <div className="mt-2">
                                     <select
-                                        {...register('brand', {
-                                            required: 'brand is required',
-                                        })}
+                                        {...register('brand',
+                                            // {
+                                            //     required: 'brand is required',
+                                            // }
+                                        )}
                                     >
                                         <option value="">--choose brand--</option>
                                         {brands.map((brand) => (
                                             <option value={brand.value}>{brand.label}</option>
                                         ))}
                                     </select>
+                                    {
+                                        errors.brand &&
+                                        (<p className="mt-2 text-sm text-red-600">{errors.brand.message}</p>)
+                                    }
                                 </div>
                             </div>
 
@@ -184,15 +199,20 @@ function ProductForm () {
                                 </label>
                                 <div className="mt-2">
                                     <select
-                                        {...register('category', {
-                                            required: 'category is required',
-                                        })}
+                                        {...register('category',
+                                            // {
+                                            //     required: 'category is required',
+                                            // }
+                                        )}
                                     >
                                         <option value="">--choose category--</option>
                                         {categories.map((category) => (
                                             <option value={category.value}>{category.label}</option>
                                         ))}
                                     </select>
+                                    {errors.category &&
+                                        (<p className="mt-2 text-sm text-red-600">{errors.category.message}</p>)
+                                    }
                                 </div>
                             </div>
 
@@ -215,6 +235,9 @@ function ProductForm () {
                                             id="price"
                                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         />
+                                        {errors.price &&
+                                            (<p className="mt-2 text-sm text-red-600">{errors.price.message}</p>)
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -238,6 +261,9 @@ function ProductForm () {
                                             id="discountPercentage"
                                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         />
+                                        {errors.discountPercentage &&
+                                            (<p className="mt-2 text-sm text-red-600">{errors.discountPercentage.message}</p>)
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -260,6 +286,9 @@ function ProductForm () {
                                             id="stock"
                                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         />
+                                        {errors.stock &&
+                                            (<p className="mt-2 text-sm text-red-600">{errors.stock.message}</p>)
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -281,6 +310,9 @@ function ProductForm () {
                                             id="thumbnail"
                                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         />
+                                        {errors.thumbnail &&
+                                            (<p className="mt-2 text-sm text-red-600">{errors.thumbnail.message}</p>)
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -302,6 +334,9 @@ function ProductForm () {
                                             id="image1"
                                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         />
+                                        {errors.image1 &&
+                                            (<p className="mt-2 text-sm text-red-600">{errors.image1.message}</p>)
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -323,6 +358,9 @@ function ProductForm () {
                                             id="image2"
                                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         />
+                                        {errors.image2 &&
+                                            (<p className="mt-2 text-sm text-red-600">{errors.image2.message}</p>)
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -344,6 +382,9 @@ function ProductForm () {
                                             id="image3"
                                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         />
+                                        {errors.image3 &&
+                                            (<p className="mt-2 text-sm text-red-600">{errors.image3.message}</p>)
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -433,7 +474,7 @@ function ProductForm () {
                 <div className="mt-6 flex items-center justify-end gap-x-6">
                     <button
                         type="button"
-                        className="text-sm font-semibold leading-6 text-gray-900"
+                        className="bg-red-400  px-3 py-1.5 text-sm font-semibold shadow-sm leading-6 text-white rounded-md"
                         onClick={(e) => {
                             e.preventDefault();
                             navigate("/admin")
@@ -442,7 +483,19 @@ function ProductForm () {
                         Cancel
                     </button>
 
-                    {selectedProduct && !selectedProduct.deleted && (
+                    {selectedProduct && selectedProduct.is_deleted && (
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleRestore()
+                            }}
+                            className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        >
+                            restore
+                        </button>
+                    )}
+
+                    {selectedProduct && !selectedProduct.is_deleted && (
                         <button
                             onClick={(e) => {
                                 e.preventDefault();

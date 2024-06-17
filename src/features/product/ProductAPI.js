@@ -73,12 +73,13 @@ export function fetchBrands () {
 
 export function createProduct (product) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/products/', {
+    const response = await fetch('http://localhost:8080/api/v1/products', {
       method: 'POST',
       body: JSON.stringify(product),
       headers: { 'content-type': 'application/json' },
     });
     const data = await response.json();
+    console.log(/apiData/, data);
     resolve({ data });
   });
 }
@@ -86,7 +87,7 @@ export function createProduct (product) {
 export function updateProduct (update) {
   return new Promise(async (resolve) => {
     const response = await fetch(
-      'http://localhost:8080/products/' + update.id,
+      'http://localhost:8080/api/v1/products/' + update.id,
       {
         method: 'PATCH',
         body: JSON.stringify(update),
